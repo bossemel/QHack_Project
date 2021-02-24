@@ -1,5 +1,5 @@
 # QHack_Project
-Project for the QHack Open Hackathon by team 'QUACK QUACK QUACK'
+Project for the QHack Open Hackathon by team 'QUACKQUACKQUACK'
 
 ## Installation
 
