@@ -6,9 +6,13 @@ import numpy as np
 import scipy
 import networkx as nx
 import copy
+import remote_cirq
+
+API_KEY = ""
+sim = remote_cirq.RemoteSimulator(API_KEY)
 
 
-def run_vqe():
+def run_vqe(use_remote=False):
     N = 15  # The number of pieces of quantum data that are used for each step
     max_time = 0.1  # The maximum value of time that can be used for quantum data
 
@@ -25,8 +29,13 @@ def run_vqe():
             total_cost += -1 * result
         return total_cost / N
     # Defines the new device
-
-    qgrnn_dev = qml.device("default.qubit", wires=2 * qubit_number + 1)
+    if use_remote:
+        qgrnn_dev = qml.device("cirq.simulator",
+                         wires=2 * qubit_number + 1,
+                         simulator=sim,
+                         analytic=True)
+    else:
+        qgrnn_dev = qml.device("default.qubit", wires=2 * qubit_number + 1)
 
     # Defines the new QNode
 
